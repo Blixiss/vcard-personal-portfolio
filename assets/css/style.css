@@ -834,38 +834,41 @@ main {
  * skills 
  */
 
-.skills-title { margin-bottom: 20px; }
+ .skill {
+  /* Pas besoin de centrer tout le texte de la section */
+  padding: 20px; /* Ajouter de l'espace autour du contenu de la section */
+}
 
-.skills-list { padding: 20px; }
+.skills-title {
+  margin-bottom: 30px; /* Ajouter de l'espace entre le titre et le bouton */
+  text-align: left; /* Garantir que le titre est aligné à gauche */
+}
 
-
-.skills-item:not(:last-child) { margin-bottom: 15px; }
-
-.skill .title-wrapper {
+.button-container {
+  /* Centrer le bouton dans le conteneur sans affecter l'alignement du titre */
   display: flex;
-  align-items: center;
-  gap: 5px;
-  margin-bottom: 8px;
-}
-
-.skill .title-wrapper data {
-  color: var(--light-gray);
-  font-size: var(--fs-7);
-  font-weight: var(--fw-300);
-}
-
-.skill-progress-bg {
-  background: var(--jet);
+  justify-content: center;
+  /* Si la section a une largeur spécifique, vous pouvez enlever la ligne suivante */
   width: 100%;
-  height: 8px;
-  border-radius: 10px;
 }
 
-.skill-progress-fill {
-  background: var(--text-gradient-yellow);
-  height: 100%;
-  border-radius: inherit;
+.cv-download-button {
+  background-color: #ffce68; /* Couleur de fond jaune */
+  color: #000000; /* Couleur de texte noire */
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none; /* Enlever le soulignement du lien */
+  font-weight: bold; /* Rendre le texte un peu plus gras */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Transition pour le fond et le texte */
 }
+
+.cv-download-button:hover {
+  background-color: #ffce68; /* Fond gris au survol */
+  color: #2e2b2b; /* Texte blanc au survol */
+}
+
+
+
 
 
 
