@@ -1,28 +1,29 @@
 'use strict';
 
-// element toggle function
+// Fonction pour basculer l'état actif d'un élément
 const elementToggleFunc = function (elem) { elem.classList.toggle("active"); }
 
-// sidebar variables
+// Variables pour la barre latérale
 const sidebar = document.querySelector("[data-sidebar]");
 const sidebarBtn = document.querySelector("[data-sidebar-btn]");
 
-// sidebar toggle functionality for mobile
+// Fonctionnalité de basculement de la barre latérale pour mobile
 if (sidebarBtn && sidebar) {
     sidebarBtn.addEventListener("click", function () { elementToggleFunc(sidebar); });
 }
 
-// custom select variables
+// Variables pour le select personnalisé
 const select = document.querySelector("[data-select]");
 const selectItems = document.querySelectorAll("[data-select-item]");
 const selectValue = document.querySelector("[data-selecct-value]");
 const filterBtn = document.querySelectorAll("[data-filter-btn]");
 
+// Basculer le select personnalisé
 if (select) {
     select.addEventListener("click", function () { elementToggleFunc(this); });
 }
 
-// add event in all select items
+// Ajout d'événements sur tous les éléments de sélection
 selectItems.forEach(item => {
     item.addEventListener("click", function () {
         let selectedValue = this.innerText.toLowerCase();
@@ -32,14 +33,19 @@ selectItems.forEach(item => {
     });
 });
 
-// filter variables
+// Variables pour le filtrage
 const filterItems = document.querySelectorAll("[data-filter-item]");
 
+// Fonction de filtrage
 const filterFunc = function (selectedValue) {
+    selectedValue = selectedValue.toLowerCase();
+
     filterItems.forEach(item => {
-        if (selectedValue === "all") {
+        let itemCategory = item.dataset.category.toLowerCase();
+
+        if (selectedValue === "tous") {
             item.classList.add("active");
-        } else if (selectedValue === item.dataset.category) {
+        } else if (itemCategory.includes(selectedValue)) {
             item.classList.add("active");
         } else {
             item.classList.remove("active");
@@ -47,7 +53,7 @@ const filterFunc = function (selectedValue) {
     });
 }
 
-// add event in all filter button items for large screen
+// Ajout d'événements sur tous les boutons de filtrage pour les grands écrans
 let lastClickedBtn = filterBtn[0];
 
 filterBtn.forEach(btn => {
@@ -64,15 +70,14 @@ filterBtn.forEach(btn => {
     });
 });
 
-// contact form variables
+// Variables pour le formulaire de contact
 const form = document.querySelector("[data-form]");
 const formInputs = document.querySelectorAll("[data-form-input]");
 const formBtn = document.querySelector("[data-form-btn]");
 
-// add event to all form input field
+// Ajout d'événements sur tous les champs de saisie du formulaire
 formInputs.forEach(input => {
     input.addEventListener("input", function () {
-        // check form validation
         if (form.checkValidity()) {
             formBtn.removeAttribute("disabled");
         } else {
@@ -81,18 +86,17 @@ formInputs.forEach(input => {
     });
 });
 
-// page navigation variables
+// Variables pour la navigation entre pages
 const navigationLinks = document.querySelectorAll("[data-nav-link]");
 const pages = document.querySelectorAll("[data-page]");
 
-// add event to all nav link
+// Ajout d'événements sur tous les liens de navigation
 navigationLinks.forEach((link, i) => {
     link.addEventListener("click", function () {
         const navLinkId = this.getAttribute('data-nav-link').toLowerCase();
         pages.forEach(page => {
             if (navLinkId === page.dataset.page) {
                 page.classList.add("active");
-                // Assurez-vous que tous les liens de navigation sont désactivés avant d'activer le lien actuel
                 navigationLinks.forEach(link => link.classList.remove("active"));
                 navigationLinks[i].classList.add("active");
                 window.scrollTo(0, 0);
